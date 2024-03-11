@@ -19,7 +19,6 @@ class EventViewSet(mixins.CreateModelMixin,
         return EventInputSerializer
 
 
-
 class OrganizationViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
     serializer_class = OrganizationSerializer
     queryset = Organization.objects.all()

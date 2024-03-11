@@ -16,7 +16,7 @@ class UserSerializer(serializers.ModelSerializer):
 class OrganizationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Organization
-        fields = ('title', 'description', 'address', 'postcode')
+        fields = ('pk', 'title', 'description', 'address', 'postcode')
 
 
 #
@@ -33,8 +33,8 @@ class OrganizationEventSerializer(OrganizationSerializer):
 
 
 class EventInputSerializer(serializers.ModelSerializer):
-    organizations = serializers.SlugRelatedField(
-        many=True, slug_field='title', queryset=Organization.objects.all())
+    organizations = serializers.PrimaryKeyRelatedField(
+        many=True, queryset=Organization.objects.all())
 
     class Meta:
         model = Event

@@ -1,9 +1,11 @@
 from django.db import models
 from django.utils import timezone
 
+from .constants import MAX_LENGTH_TITLE, MAX_LENGTH_ADRESS, MAX_LENGTH_POSTCODE
+
 
 class EventAbstractModel(models.Model):
-    title = models.CharField('Название', max_length=150)
+    title = models.CharField('Название', max_length=MAX_LENGTH_TITLE)
     description = models.TextField('Описание')
 
     class Meta:
@@ -14,8 +16,8 @@ class EventAbstractModel(models.Model):
 
 
 class Organization(EventAbstractModel):
-    address = models.CharField('Адрес', max_length=150)
-    postcode = models.CharField('Индекс', max_length=150)
+    address = models.CharField('Адрес', max_length=MAX_LENGTH_ADRESS)
+    postcode = models.CharField('Индекс', max_length=MAX_LENGTH_POSTCODE)
 
     class Meta:
         verbose_name = 'Организация'
