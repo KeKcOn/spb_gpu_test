@@ -1,0 +1,33 @@
+version: '3.3'
+
+services:
+  backend:
+    build: ./conf/
+    env_file: .env
+    ports:
+      - '8000:8000'
+    volumes:
+      - ./conf:/app
+  redis:
+    image: redis:7.0.5-alpine
+    hostname: redis
+  worker:
+    build: ./conf/
+    env_file: .env
+    entrypoint: celery
+    command: -A celery_app.app worker --beat
+    depends_on:
+      - redis
+    volumes:
+      - ./conf:/app
+  flower:
+    build: ./conf/
+    hostname: flower
+    entrypoint: celery
+    command: -A celery_app.app flower
+    depends_on:
+      - redis
+    ports:
+      - '5555:5555'
+    volumes:
+      - ./conf:/app

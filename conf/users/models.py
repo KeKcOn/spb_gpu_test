@@ -15,6 +15,7 @@ class User(AbstractUser):
         validators=(validate_phone_number,),
         default=None,
         blank=True,
+        null=True,
     )
     email = models.EmailField(
         'Электронная почта',

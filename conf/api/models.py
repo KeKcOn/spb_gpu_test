@@ -38,7 +38,7 @@ class Event(EventAbstractModel):
         default=None,
         blank=True,
     )
-    date = models.DateTimeField('Дата')
+    date = models.DateField('Дата')
 
     class Meta:
         verbose_name = 'Мероприятие'
